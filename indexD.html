@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>TwoFourSix D</title>
+</head>
+<body>
+  <br>
+  The sequence [20, 25, 40] is valid. Test other sequences below to discover what makes a sequence valid. When you think you know, write down your guess, reveal the rule, and see how it compares.
+  (You should try to deduce the truth using as few guesses as possible; however, your main priority is getting the rule right.)
+  <br>
+  <br>
+  <br>
+  [<input type="number" id="n1"> , <input type="number" id="n2"> , <input type="number" id="n3">]
+  <br>
+  <br>
+  <button onclick="test()">Test</button>
+  <br>
+  <br>
+  <br>
+  Results:
+  <br>
+  <br>
+  <div style="height: 30vh; width: 300px; overflow: auto;" id="tests">
+  0) [20, 25, 40] is VALID
+  </div>
+  <br>
+  <div id="iswas">Your guess is . . .</div>
+  <div id="guessdiv">
+  <textarea id="guess" rows=4></textarea>
+  </div>
+  <br>
+  <div id="rulediv"><button onclick="show_rule()">Show Rule</button></div>
+  <div id="theRule"></div>
+
+<script id="jsbin-javascript">
+
+ntests=0
+
+function test(){
+	n1 = document.getElementById("n1").value
+	n2 = document.getElementById("n2").value
+	n3 = document.getElementById("n3").value
+	if (validate_input(n1, n2, n3)){
+  ntests+=1
+  
+  document.getElementById("n1").value = ""
+  document.getElementById("n2").value = ""
+  document.getElementById("n3").value = ""
+  
+	 if (evaluate_input(n1, n2, n3)){
+		 document.getElementById("tests").innerHTML += ("<br>"+ntests+") [" + n1 + ", " + n2 + ", " + n3 + "] is VALID")
+	 }
+	 else{
+		 document.getElementById("tests").innerHTML += ("<br>"+ntests+") [" + n1 + ", " + n2 + ", " + n3 + "] is NOT VALID")
+	 }
+ }
+}
+
+//-----------------------
+
+function validate_input(n1,n2,n3){
+	if (isNaN(Number(n1)) || isNaN(Number(n2)) || isNaN(Number(n3))) {
+  return false
+ }
+	if ((n1=="") || (n2=="") || (n3=="")) {
+  return false
+ }
+ return true
+}
+
+function evaluate_input(n1,n2,n3){
+ n1 = Number(n1)
+ n2 = Number(n2)
+ n3 = Number(n3)
+ 
+ if ((n1%10)==0){
+  return true
+ }
+ if ((n2%10)==0){
+  return true
+ }
+ if ((n3%10)==0){
+  return true
+ }
+ 
+ return false 
+}
+
+
+//-----------------------
+
+function show_rule(){
+ document.getElementById("iswas").innerHTML = "After " +ntests + " tests, your guess was . . ."
+	document.getElementById("guessdiv").innerHTML = '"' + document.getElementById("guess").value + '"'
+ document.getElementById("rulediv").innerHTML = "The rule is . . ."
+ 
+ document.getElementById("theRule").innerHTML = '"At least one of the numbers is divisible by 10."'
+}
+
+
+</script>
+</body>
+</html>
+
